@@ -1,6 +1,9 @@
 package com.automation.tests.bootcamp;
 
+import com.google.common.io.Files;
 import io.restassured.response.Response;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -8,11 +11,12 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 public class MetaWeatherTests {
-
+    private final static Logger logger = LogManager.getLogger(MetaWeatherTests.class);
 
     @BeforeAll
     public static void beforeAll() {
         baseURI = "https://www.metaweather.com/api";
+        logger.info("Using base URI: https://www.metaweather.com/api");
     }
 
     @Test
@@ -41,6 +45,7 @@ public class MetaWeatherTests {
 //        in rest assured, then() part is used for verifications
 //        we use hamcrest matcher for assertions
         int woeid = response.jsonPath().getInt("[0].woeid");
+
 //      {woeid} - path parameter
 //        put value after ,
 //        path parameters must be inside {}
